@@ -1,30 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaPlaneDeparture, FaPlaneArrival, FaPlane } from "react-icons/fa";
-
-type Airport = {
-  code: string;
-  name: string;
-};
-
-type Flight = {
-  id: string;
-  flightNumber: string;
-  departureAirport: Airport;
-  arrivalAirport: Airport;
-  scheduleDate: string;
-  scheduleTime: string;
-  estimatedArrivalTime: string;
-  flightDirection: string;
-  airline: string;
-  isConnecting: boolean;
-  price: {
-    economy: number;
-    business: number;
-  };
-  estimatedDuration: string;
-};
+import { Flight } from '../../models/Flight';
 
 const Flights: React.FC<{ filteredFlights: Flight[] }> = ({
   filteredFlights = [],

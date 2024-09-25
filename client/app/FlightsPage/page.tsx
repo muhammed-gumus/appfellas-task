@@ -1,18 +1,23 @@
 "use client";
 
-import React from "react"; // Add this import
+import React, { useState } from "react"; // Add this import
 import BookYourFlight from "@/components/BookYourFlight";
 import FlightsList from "@/components/FlightList";
 import Image from "next/image";
 import Filter from "@/components/Filter";
+import { Flight } from '../../models/Flight'; // Flight modelini doğru yerden import edin
 
 export default function FlightsPage() {
-  const [filteredFlights, setFilteredFlights] = React.useState<any[]>([]);
+  const [filteredFlights, setFilteredFlights] = useState<Flight[]>([]);
+
+  const handleSetFilteredFlights = (flights: Flight[]) => {
+    setFilteredFlights(flights);
+  };
 
   return (
     <div className="flex items-start justify-center w-full px-12 gap-6">
       <div className="flex flex-col w-4/5">
-        <BookYourFlight setFilteredFlights={setFilteredFlights} /> {/* setFilteredFlights prop'u eklendi */}
+        <BookYourFlight setFilteredFlights={handleSetFilteredFlights} /> {/* setFilteredFlights prop'u eklendi */}
         <div className="flex w-full">
           <div className="w-3/4">
             <FlightsList filteredFlights={filteredFlights} />
@@ -28,7 +33,7 @@ export default function FlightsPage() {
             <div className="h-[250px] relative">
               <Image
                 src="/images/hotels.png"
-                alt="Oteller"
+                alt="Hotels"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-xl"
@@ -37,7 +42,7 @@ export default function FlightsPage() {
             <div className="h-[250px] relative">
               <Image
                 src="/images/car.png"
-                alt="Araba Kiralama"
+                alt="Car Rental"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-xl"
@@ -46,7 +51,7 @@ export default function FlightsPage() {
             <div className="h-[250px] relative">
               <Image
                 src="/images/travel.png"
-                alt="Seyahat"
+                alt="Travel"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-xl"

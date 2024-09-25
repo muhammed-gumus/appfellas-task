@@ -3,15 +3,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaPlaneDeparture, FaPlaneArrival, FaCalendarAlt } from "react-icons/fa";
 import axios from 'axios';
-import Flights from "@/components/FlightList";
+import { Flight } from '@/models/Flight';
 
 interface BookYourFlightProps {
-  setFilteredFlights: (flights: any[]) => void;
+  setFilteredFlights: (flights: Flight[]) => void;
 }
+
+// Flight tipini burada tekrar tanımlamaya gerek yok, import edilen tipi kullanacağız.
 
 const BookYourFlight = ({ setFilteredFlights }: BookYourFlightProps) => {
   const [selectedTrip, setSelectedTrip] = useState("roundTrip");
-  const [flights, setFlights] = useState<any[]>([]);
+  const [flights, setFlights] = useState<Flight[]>([]);
   const [airports, setAirports] = useState<string[]>([]);
   const [selectedDeparture, setSelectedDeparture] = useState<string>("");
   const [selectedArrival, setSelectedArrival] = useState<string>("");
@@ -60,7 +62,7 @@ const BookYourFlight = ({ setFilteredFlights }: BookYourFlightProps) => {
   };
 
   const filterFlights = () => {
-    return flights.filter((flight: any) => {
+    return flights.filter((flight: Flight) => {
       const flightDate = new Date(flight.scheduleDate).toISOString().split('T')[0];
 
       if (isArrival) {
